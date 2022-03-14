@@ -23,22 +23,23 @@ def make_vd_dir():
     try:
         print('Creating voice_data directory...\n')
         os.makedirs('voice_data')
+        
     except OSError as err:
         if err.errno != errno.EEXIST:
             raise
         print('voice_data directory already exists.\n')
 
-        cont_cmd = input('Continue with downloading voice data? (Y/N)\n')
+    cont_cmd = input('Continue with downloading voice data? (Y/N)\n')
 
-        if cont_cmd.upper() == 'Y':
-            print('Continuing file download...\n')
-            get_voice_data()
-        elif cont_cmd.upper() == 'N':
-            print('Aborting file download.\n')
-            return
-        else:
-            print("Input not valid, aborting file download.\n")
-            return
+    if cont_cmd.upper() == 'Y':
+        print('Continuing file download...\n')
+        get_voice_data()
+    elif cont_cmd.upper() == 'N':
+        print('Aborting file download.\n')
+        return
+    else:
+        print("Input not valid, aborting file download.\n")
+        return
 
 def get_voice_data():
     '''This function will download the voice data into a local folder.'''
