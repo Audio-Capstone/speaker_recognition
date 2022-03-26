@@ -1,5 +1,6 @@
-# Ignore voice data files:
+# Ignore voice data files and notebooks used for testing:
 voice_data/
+notebooks/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
