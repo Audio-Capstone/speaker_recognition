@@ -23,9 +23,11 @@ def remove_silence():
         voice_file_fp = mono_audio_dir + voice_file
         voice_file_nm = voice_file[:-4]
         
+        # FIXME: MAKE IT CLEAR THAT .LOAD CHANGES SAMPLING RATE. SEPARATE FUNCTION?
         audio, samp_rate = librosa.load(voice_file_fp, mono=True)
 
-        audio_clips = librosa.effects.split(audio, top_db=30)
+        # top_db is something we could play with more, tried 30 but 40 might be better:
+        audio_clips = librosa.effects.split(audio, top_db=40)
 
         audio_data = []
 
