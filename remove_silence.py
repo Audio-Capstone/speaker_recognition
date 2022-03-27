@@ -1,44 +1,5 @@
-import utils
 import sys
-import os
-import librosa
-import re
-import soundfile as sf
-
-def remove_silence():
-    mono_audio_dir = './voice_data/mono_channels/'
-    sil_rem_dir = mono_audio_dir + '/silence_removed/'
-    voice_files = [file for file in os.listdir(mono_audio_dir) if re.match(r'[0-9]+\_(?:left|right)\.wav', file)]
-    
-    total_files = len(voice_files)
-    start_file = 0
-    
-    for voice_file in voice_files:
-        start_file = start_file + 1
-        
-        print(f'Removing periods of silence from file {start_file} of {total_files}...\n')
-        
-        file_name = voice_file[:-4]
-        
-        voice_file_fp = mono_audio_dir + voice_file
-        voice_file_nm = voice_file[:-4]
-        
-        # FIXME: MAKE IT CLEAR THAT .LOAD CHANGES SAMPLING RATE. SEPARATE FUNCTION?
-        audio, samp_rate = librosa.load(voice_file_fp, mono=True)
-
-        # top_db is something we could play with more, tried 30 but 40 might be better:
-        audio_clips = librosa.effects.split(audio, top_db=40)
-
-        audio_data = []
-
-        for clip in audio_clips:
-            data = audio[clip[0]:clip[1]]
-            audio_data.extend(data)
-
-        sf.write(f'{sil_rem_dir}{voice_file_nm}_sil_rmvd.wav', audio_data, samp_rate)
-        
-    print('Removing silence process complete.\n')
-        
+from functions import processing_funcs, utils
         
 if  __name__ == "__main__":
     
@@ -49,5 +10,5 @@ if  __name__ == "__main__":
         print('Proceed with removing silence from voice data?')
         if utils.continue_check() == False:
             sys.exit()
-    remove_silence()
+    processing_funcs.remove_silence()
     sys.exit()
