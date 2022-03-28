@@ -32,13 +32,13 @@ def split_stereo_audio(voice_dir_path = './voice_data/',
         
         mono_channels = aud_seg.split_to_mono()
         
-        mono_left = mono_channels[0].export(f'{mono_channel_dir}{voice_file_nm}_left.wav', format='wav')
-        mono_right = mono_channels[1].export(f'{mono_channel_dir}{voice_file_nm}_right.wav', format='wav')
+        mono_left = mono_channels[0].export(f'{mono_channel_dir}{voice_file_nm}_L.wav', format='wav')
+        mono_right = mono_channels[1].export(f'{mono_channel_dir}{voice_file_nm}_R.wav', format='wav')
         
     print('Splitting complete.\n')
 
 def remove_silence(mono_channel_dir = './voice_data/mono_channels/',
-                   file_regex = r'[0-9]+\_(?:left|right)\.wav'):
+                   file_regex = r'[0-9]+\_(?:L|R)\.wav'):
     
     '''This function will sample the audio at a rate of 8kHz and attempt to remove periods of silence from mono audio channels.'''
     
@@ -65,8 +65,8 @@ def remove_silence(mono_channel_dir = './voice_data/mono_channels/',
         # of our dataset, 8kHz, so we're specifying it here:
         audio, samp_rate = librosa.load(voice_file_path, mono = True, sr = 8000)
 
-        # top_db is something we could play with more, tried 30 but 40 might be better:
-        audio_clips = librosa.effects.split(audio, top_db=40)
+        # top_db is something we could play with more, using 30 based on limited testing:
+        audio_clips = librosa.effects.split(audio, top_db=30)
 
         audio_data = []
 
