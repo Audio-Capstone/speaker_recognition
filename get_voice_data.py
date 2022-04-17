@@ -1,7 +1,7 @@
 import requests
 import sys
 from bs4 import BeautifulSoup
-import utils
+from functions import utils
 
 def get_voice_data():
     '''This function will download the voice data into a local folder.'''

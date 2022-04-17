@@ -41,7 +41,7 @@ def get_file_duration(file_path, minutes=False):
         return file_duration_mins
     return file_duration_secs
     
-def read_dir_files(dir_path = '.voice_data/',
+def read_dir_files(dir_path = 'voice_data',
                    file_regex = r'[0-9]+\.wav'):
     
     print(f'Collecting all files in {dir_path} matching regular expression {file_regex}.\n')
