@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup
 import os
 import errno
 import regex as re
@@ -73,4 +75,29 @@ def del_dir_files(dir_path=None, check=True, verbose=False):
     
     print(f'Removal of all files in {dir_path} complete.')
     
-    
+def get_voice_data(voice_dir):
+    '''This function will download the voice data into a local folder.'''
+
+    url = 'https://media.talkbank.org/ca/CallFriend/eng-n/0wav/'
+
+    reqs = requests.get(url)
+    soup = BeautifulSoup(reqs.text, 'html.parser')
+
+    urls = []
+
+    vd_dir = voice_dir
+
+    for link in soup.find_all('a'):
+        urls.append(link.get('href'))
+
+    total_files = len(urls[5:])
+    start_file = 0
+
+    for url in urls[5:]:
+        start_file = start_file + 1
+        print(f'Downloading file {start_file} of {total_files}...\n')
+        vd_file = os.path.join(vd_dir, url)
+        with open(vd_file, 'wb') as f_out:
+            url = 'https://media.talkbank.org/ca/CallFriend/eng-n/0wav/' + url
+            f_out.write(requests.get(url).content)
+

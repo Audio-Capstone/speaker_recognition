@@ -29,6 +29,10 @@ pip3 install <package name>
 On my RHEL 8 box, I also had to download ffmeg binary and add it to my class path. It can be downloaded from:
 https://www.ffmpeg.org/download.html
 
+## Getting Started
+
+Navigate to, and run the 'data_processing' notebook or follow steps below to get started via the command line.
+
 ## Obtaining the Data:
 
 To build our voice recognition model, we have decided to use the following public dataset:
