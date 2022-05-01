@@ -81,7 +81,7 @@ def reduce_noise(voice_dir_path = 'voice_data',
 
 def remove_silence(mono_channel_dir = 'voice_data/mono_channels',
                    sil_rem_dir_path = 'silence_removed',
-                   file_regex = r'[0-9]+\_(?:L|R)\.wav'): #FIXME CHANGE REGEX
+                   file_regex = r'[0-9]+\_(?:L|R)\.wav'): 
     
     '''This function will sample the audio at a rate of 8kHz and attempt to remove periods of silence from mono audio channels.'''
     

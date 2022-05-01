@@ -69,7 +69,7 @@ We have written a script to do this that can be run with the following command:
 python3 split_stereo_audio.py
 ```
 
-SECTION FOR REMOVING NOISE - FIXME
+SECTION FOR REMOVING NOISE 
 
 Next, the periods of silence are removed from each of these files using:
 
