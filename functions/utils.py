@@ -91,13 +91,31 @@ def get_voice_data(voice_dir):
         urls.append(link.get('href'))
 
     total_files = len(urls[5:])
-    start_file = 0
+    progress_cnt = 0
+    progress_prcnt = 0
+    prcnt_print = 0
+
+    print(f'Downloading {total_files} files from {url}')
 
     for url in urls[5:]:
-        start_file = start_file + 1
-        print(f'Downloading file {start_file} of {total_files}...\n')
+        progress_cnt = progress_cnt + 1
         vd_file = os.path.join(vd_dir, url)
         with open(vd_file, 'wb') as f_out:
             url = 'https://media.talkbank.org/ca/CallFriend/eng-n/0wav/' + url
             f_out.write(requests.get(url).content)
 
+        progress_prcnt = progress_cnt / total_files
+        if progress_prcnt >= prcnt_print + 0.1:
+            print("{}% done...".format(round(progress_prcnt * 100, 2)))
+            prcnt_print += 0.1
+    print(f'All {total_files} downloaded to the {vd_dir} directory')
+
+def clear_train_test_dirs():
+    training_dirs = os.listdir(train_top_dir)
+    testing_dirs = os.listdir(test_top_dir)
+                
+    for train_dir in training_dirs:
+        utils.del_dir_files(dir_path=os.path.join(train_top_dir, train_dir), check=False, verbose=False)
+                                        
+    for testing_dir in testing_dirs:
+        utils.del_dir_files(dir_path=os.path.join(test_top_dir, testing_dir), check=False, verbose=False)
