@@ -1,7 +1,7 @@
 # speech_recognition
 UMBC DATA 606 Capstone Project
 
-Audio data is a fascinating topic that neither of us have delved into before. While we have used machine learning for image classification and other tasks, we have not tackled any projects dealing with sound.
+Audio data is a fascinating topic that neither of us have delved into before. While we have used machine learning for image classification and other tasks, we have not tackled any projects dealing with sound. We have made a blog post of our progress through this project available at https://audio-capstone.github.io
 
 In particular, we want to explore what it takes to process data on voices and recognize particular speakers.
 
